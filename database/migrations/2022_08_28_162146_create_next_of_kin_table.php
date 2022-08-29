@@ -13,12 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('next_of_kin', function (Blueprint $table) {
             $table->id();
-            $table->string('user-name')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->foreignId('profile_id')->constrained();
+            $table->string('name');
+            $table->string('phone_number');
+            $table->string('address');
+            $table->string('town');
+            $table->string('city');
+            $table->string('country')->default('Nigeria');
+            $table->string('relationship');
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('next_of_kin');
     }
 };
